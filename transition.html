@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+<style>
+.a{
+content:"hii";
+width:100px;
+height:100px;
+background-color:orange;
+}
+.a:hover{
+width:300px;
+background-color:green;
+}
+.b{
+width:100px;
+height:100px;
+background-color:brown;
+transition: width 2s,height 2s,transform 4s;
+}
+.b:hover{
+width:200px;
+height:200px;
+background: linear-gradient(pink, yellow,orange);
+transform:rotate(160deg);}
+.tooltip{
+text-align:center;
+color:red;
+}
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 200px;
+  background-color: yellow;
+  padding:5px;
+
+}
+.tooltip:hover .tooltiptext{
+visibility: visible;
+}
+</style>
+</head>
+<body>
+<h1>USING GRADIANT,TRANSITION,TRANSFORM,TOOLTIP</h1>
+<div class="tooltip">AARTHI<span class="tooltiptext">sweet smiley girl</span></div></br><br>
+<div class="a"> Touch i become green</div></br>
+<div class="b">SUPRISE</div>
+</body>
+</html>
