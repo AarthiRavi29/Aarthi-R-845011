@@ -1,8 +1,10 @@
 package com.example.shapes;
 
-public class Square {
+public class Circle {
+
 	public void claculateArea(int r){
-		double Area=r*r;
+		double pi=3.14;
+		double Area=(int)pi*r*r;
 		System.out.println( Area);
 		
 	}
