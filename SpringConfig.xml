@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"> <!-- bean definitions here -->
+
+
+<bean id="Bean1" class="com.test.FirstBean">
+         <!--setter injection-->
+         <property name="name" value="Aarthi"/>
+         </bean>
+        <bean id="myaddress" class="com.test.Address">
+        <constructor-arg value="chennai"></constructor-arg>
+        <constructor-arg value="india"></constructor-arg>
+        </bean>
+        <bean id="myemployee1" class="com.test.EmployeeBean">
+        <constructor-arg value="1001" type="int"></constructor-arg>
+        <constructor-arg value="Aarthi"></constructor-arg>
+        <constructor-arg>
+        <ref bean="myaddress"/></constructor-arg>
+        </bean>
+        
+        
+       <bean id="stud" class="com.test.Student" abstract="true">
+        <property name="sid" value="1001"/>
+        <property name="name" value="arthi"/>
+        </bean>
+       <bean id="course1" class="com.test.Student_Course" parent="stud">
+       <property name="name" value="Aarthi R"/>
+       <property name="cid" value="1"/>
+       <property name="cname" value="CSE"/>
+       </bean>
+       
+       <context:property-placeholder location="classpath:springuser.properties,mydb.properties"/>
+        <bean id="prop1" class="com.test.User_Properties">
+        <property name="user" value="${u1}"/>
+        <property name="role" value="${r1}"/>
+        <property name="email" value="${e1}"/>
+       </bean>
+       
+       <bean id="b11" class="com.test.Branch">
+       <property name="city" value="Chennai"/>
+       <property name="country" value="India"/>
+       </bean>
+       
+       <bean id="bank_aw" class="com.test.Bank">
+       <property name="bankname" value="SBI"/>
+       <property name="mgrname" value="Vino"/>
+       <property name="b1" ref="b11"/>
+       </bean>
+       
+       <!-- Autowiring
+       Instead of ref
+       autowire attribute in bean tag
+       it works with reference only
+       it cant be used to inject primitive and string values
+       it has four modes no,
+       byname,bytype,constructor -->
+      
+       <bean id="b1" class="com.test.Branch">
+       <property name="city" value="Chennai"/>
+       <property name="country" value="India"/>
+       </bean>
+       
+       <bean id="bank_aw1" class="com.test.Bank" autowire="byName">
+       <property name="bankname" value="SBI"/>
+       <property name="mgrname" value="Vino"/>
+        </bean>
+       
+       <!-- i  have already created the bean class for address and employee -->
+       <!-- Autowire constructor -->
+   
+       <bean id="myemployee2" class="com.test.EmployeeBean" autowire="constructor">
+       <constructor-arg value="1" type="int"/>
+       <constructor-arg value="kanishka"/> 
+       <!--  type is not necessary for the String becoz default type
+       is string other than that type is mandatory-->
+      </bean>
+       <!-- Autowiring Annotation -->
+       <!-- Used to activated the
+       @Autowired annotation in Spring -->
+       <context:annotation-config/>
+       <bean id="b18" class="com.test.Branch">
+       <property name="city" value="Bangalore"/>
+       <property name="country" value="India"/>
+       </bean>
+       <!-- no autowire and ref tag 
+       BUT AUTOWIRE ANNOTATION USED IN BEAN CLASS-->
+       
+       <bean id="anno1" class="com.test.Bank_AutoWire">
+       <property name="bankname" value="AXIS"/>
+       <property name="mgrname" value="Raja"/>
+       </bean>
+       
+       <!-- COLLECTION-SETTER INJECTION -->
+       <bean id="obj1" class="com.test.Vendor_Collection">
+<property name="vid" value="100"></property>
+<property name="vendorname" value="BLT"></property>
+<property name="cus_name">
+<list>
+<value>CTS</value>
+<value>TCS</value>
+<value>ACCENTURE</value>
+<value>CTS</value>
+</list>
+</property>
+       </bean>
+       
+       <bean id="tr1" class="com.test.Technology_coll">
+       <property name="tech_name" value="Servlets"></property>
+       <property name="assessment" value="no"></property>
+       </bean>
+       
+       <bean id="tr2" class="com.test.Technology_coll">
+       <property name="tech_name" value="JSP"></property>
+       <property name="assessment" value="no"></property>
+       </bean>
+       
+       <bean id="tco1" class="com.test.Training_Collection">
+       <property name="batchno" value="2"></property>
+       <property name="projname" value="Insurance"></property>
+       <property name="tc1">
+       <list>
+       <!-- Collection injection with ref tag -->
+       <ref bean="tr1"/>
+       <ref bean="tr2"/>
+        </list>
+       </property>
+       </bean>
+       
+       <bean id="asmap1" class="com.test.Assesment_MapCollection">
+       <property name="sid" value="1"/>
+       <property name="sname" value="Aarthi"/>
+       <property name="test_details">
+       <map>
+       <entry key="Java" value="yes"></entry>
+       <entry key="SQL" value="yes"></entry>
+       </map>
+       </property>
+       </bean>
+       
+       <!-- COLLECTION-Constructer INJECTION -->
+       <bean id="obj2" class="com.test.Vendor_ColConstructor">
+        <constructor-arg value="1" type="int"/>
+       <constructor-arg value="BLT"/> 
+       <constructor-arg>
+       <list>
+<value>CTS</value>
+<value>TCS</value>
+<value>ACCENTURE</value>
+<value>CTS</value>
+</list>
+       </constructor-arg>
+       </bean>
+       
+       <!-- COLLECTION Set-Constructer INJECTION -->
+       <bean id="obj3" class="com.test.Vendor_SetConstructor">
+        <constructor-arg value="1" type="int"/>
+       <constructor-arg value="BLT"/> 
+       <constructor-arg>
+       <set>
+<value>CTS</value>
+<value>TCS</value>
+<value>ACCENTURE</value>
+<value>CTS</value>
+</set>
+      </constructor-arg>
+       </bean>
+       <!-- <bean id="mark1" class="com.test.Marksheet_Coll">
+       <constructor-arg value="Maths"/>
+        <constructor-arg value="98"/>
+       </bean>
+       <bean id="mark2" class="com.test.Marksheet_Coll">
+       <constructor-arg value="Science"/>
+        <constructor-arg value="78.45"/>
+       </bean>-->
+       <!-- MapConcept in constructor -->
+      <!--  <bean id="stud1" class="com.test.Stud_CollectionRef">
+       <constructor-arg value="Aarthi"/>
+       <constructor-arg value="tenth"/>
+       <constructor-arg>
+       <map>
+      <ref bean="mark1"/>
+      <ref bean="mark2"/>
+      </map>
+       </constructor-arg>
+       </bean>-->
+      <bean id="database1" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+       
+       <property name="driverClassName" value="${driver}"/>
+              
+       <property name="url" value="${dburl}"/>
+       <property name="username" value="${dbuser}"/>
+       <property name="password" value="${dbpassword}"/>
+       
+       </bean>
+       <bean id="mydatabase" class="com.DAO.Employee_JdbcTemplate1">
+       <property name="datasource" ref="database1"/>
+       </bean>
+       <!-- automatically scan all the classes inside the package, which are marked with
+       '@Component ' annotation -->
+       <context:component-scan base-package="com.test"/>
+</beans>
