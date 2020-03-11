@@ -5,13 +5,12 @@
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
   <servlet>
-  	<servlet-name>WelcomJsp</servlet-name>
-  	<display-name>WelcomJsp</display-name>
-  	<description></description>
-  	<servlet-class>com.test.WelcomJsp</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>WelcomJsp</servlet-name>
-  	<url-pattern>/WelcomJsp</url-pattern>
-  </servlet-mapping>
+ <servlet-name>spring</servlet-name>
+ <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+ <load-on-startup>1</load-on-startup>
+ </servlet>
+ <servlet-mapping>
+ <servlet-name>spring</servlet-name>
+ <url-pattern>/</url-pattern>
+ </servlet-mapping>
 </web-app>
