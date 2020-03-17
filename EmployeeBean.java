@@ -1,17 +1,30 @@
-package com.test;
+package com.cts;
 
 public class EmployeeBean {
-String name;
-int eno;
-Address addr;
-public EmployeeBean(String name, int eno, Address addr) {
-	super();
-	this.name = name;
+public int eno;
+public String name;
+public float salary;
+public int getEno() {
+	return eno;
+}
+public void setEno(int eno) {
 	this.eno = eno;
-	this.addr = addr;
 }
-void show(){
-	System.out.println("Employee details:"+eno+" "+name);
-	System.out.println(addr);
+public String getName() {
+	return name;
 }
+public void setName(String name) {
+	this.name = name;
+}
+public float getSalary() {
+	return salary;
+}
+public void setSalary(float salary) {
+	this.salary = salary;
+}
+
+
+
+
+
 }
